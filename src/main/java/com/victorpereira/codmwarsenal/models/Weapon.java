@@ -18,6 +18,8 @@ public class Weapon {
 	
 	private String name;
 	
+	private String type;
+	
 	private Integer chestDmg;
 	
 	private Integer magSize;
