@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.victorpereira.codmwarsenal.models.Weapon;
 import com.victorpereira.codmwarsenal.repositories.WeaponRepository;
-import com.victorpereira.codmwarsenal.resources.utils.URL;
+import com.victorpereira.codmwarsenal.resources.utils.Utils;
 
 @RestController
 @RequestMapping(value = "/weapons")
@@ -37,14 +38,28 @@ public class WeaponResource {
 
 	@GetMapping(value = "/name")
 	public Weapon findByName(@RequestParam(value = "text") String name) {
-		name = URL.decodeParam(name);
+		name = Utils.decodeParam(name);
 		return repo.findByNameContainingIgnoreCase(name);
 	}
 
 	@GetMapping(value = "/type")
 	public List<Weapon> findByType(@RequestParam(value = "text", defaultValue = "") String type) {
-		type = URL.decodeParam(type);
-		return repo.findByTypeIgnoreCase(type);
+		return repo.findByTypeIgnoreCase(Utils.decodeParam(type));
+	}
+
+	@PutMapping(value = "/{id}")
+	public Weapon update(@RequestBody Weapon weapon, @PathVariable String id) {
+		Weapon obj = findById(id);
+		Utils.updateData(obj, weapon);
+		return repo.save(obj);
+	}
+
+	@PutMapping(value = "/name")
+	public Weapon updateByName(@RequestBody Weapon weapon,
+			@RequestParam(value = "text", defaultValue = "") String name) {
+		Weapon obj = findByName(name);
+		Utils.updateData(obj, weapon);
+		return repo.save(obj);
 	}
 
 	@PostMapping
