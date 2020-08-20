@@ -3,12 +3,9 @@ package com.victorpereira.codmwarsenal.resources;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-=======
 import org.springframework.web.bind.annotation.CrossOrigin;
->>>>>>> 93fdf8f... Swagger documentation
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,30 +57,4 @@ public class WeaponResource {
 		return repo.findByTypeIgnoreCase(Utils.decodeParam(type));
 	}
 
-	@PutMapping(value = "/{id}")
-	public Weapon update(@RequestBody Weapon weapon, @PathVariable String id) {
-		Weapon obj = findById(id);
-		Utils.updateData(obj, weapon);
-		return repo.save(obj);
-	}
-
-	@PutMapping(value = "/name")
-	public Weapon updateByName(@RequestBody Weapon weapon,
-			@RequestParam(value = "text", defaultValue = "") String name) {
-		Weapon obj = findByName(name);
-		Utils.updateData(obj, weapon);
-		return repo.save(obj);
-	}
-
-	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public Weapon insert(@RequestBody Weapon weapon) {
-		return repo.insert(weapon);
-	}
-
-	@DeleteMapping(value = "/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable String id) {
-		repo.deleteById(id);
-	}
 }
