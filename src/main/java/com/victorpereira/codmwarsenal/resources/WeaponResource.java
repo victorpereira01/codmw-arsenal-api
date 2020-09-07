@@ -56,5 +56,19 @@ public class WeaponResource {
 	public List<Weapon> findByType(@RequestParam(value = "text", defaultValue = "") String type) {
 		return repo.findByTypeIgnoreCase(Utils.decodeParam(type));
 	}
-
+	
+	@PostMapping
+	@ApiOperation(value="Create a new weapon")
+	public Weapon insert(@RequestBody Weapon weapon) {
+		return repo.insert(weapon);
+	}
+	
+	@PutMapping(value="/{id}")
+	@ApiOperation(value="Update a existing weapon") 
+	public Weapon update(@RequestBody Weapon weapon, @PathVariable String id ) {
+		Weapon wp = findById(id);
+		Utils.updateData(wp, weapon);
+		return repo.save(wp);
+	}
 }
+
