@@ -11,6 +11,14 @@ See full documentation at: https://codmw-arsenal.herokuapp.com/swagger-ui.html
 ### Register request example
 ![request](https://user-images.githubusercontent.com/55858659/92421552-707a6000-f14f-11ea-887b-c3f631bba819.png)
 
+## 🆕 Updates
+<ul>
+  <li>Season 6 Patch:</li>
+  <ul>
+    <li>New weapons AS VAL and SP-R208 and Origin nerf.</li>
+  </ul>
+</ul>
+
 ## 🚀 Technologies
 <ul>
   <li>Spring Boot</li>
